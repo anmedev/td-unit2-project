@@ -13,6 +13,7 @@ For assistance:
 
 // Sets the number of student cards that will display per page
 const studentsPerPage = 9;
+const linkList = document.querySelector(".link-list");
 
 /*
 Create the `showPage` function
@@ -54,27 +55,37 @@ This function will create and insert/append the elements needed for the paginati
 
 function addPagination(list) {
    const numOfPages = Math.ceil(list.length / studentsPerPage);
-   const linkList = document.querySelector(".link-list");
    linkList.innerHTML = "";
 
    for (let i = 1; i <= numOfPages; i++ ) {
-      const pageButton = `
+      const pageBtn = `
          <li>
             <button type="button">${i}</button>
          </li>
       `
-      linkList.insertAdjacentHTML("beforeend", linkList);
-
-
+      linkList.insertAdjacentHTML("beforeend", pageBtn);
    }
 
+   linkList.querySelector("button").classList.add("active");
 
+   // Event Listener
+   linkList.addEventListener('click', (e) => {
+      const activeBtn = linkList.querySelector(".active");
+      const clickedBtn = e.target.closest("button");
 
-
+      if (clickedBtn) {
+         activeBtn.classList.remove("active");
+         clickedBtn.classList.add("active");
+         showPage(data, clickedBtn.innerHTML);
+      }
+   });
 }
 
 
 
+
+
 // Call functions
-addPagination(list);
+
+addPagination(data);
 showPage(data, 1);
