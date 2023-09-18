@@ -11,7 +11,8 @@ For assistance:
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
 
-
+// Sets the number of student cards that will display per page
+const studentsPerPage = 9;
 
 /*
 Create the `showPage` function
@@ -19,9 +20,8 @@ This function will create and insert/append the elements needed to display a "pa
 */
 
 function showPage(list, page) {
-   const itemsPerPage = 9;
-   const startIndex = (page * itemsPerPage) - itemsPerPage;
-   const endIndex = page * itemsPerPage;
+   const startIndex = (page * studentsPerPage) - studentsPerPage;
+   const endIndex = page * studentsPerPage;
    let studentList = document.querySelector(".student-list");
    studentList.innerHTML = "";
 
@@ -44,7 +44,7 @@ function showPage(list, page) {
    }
 }
 
-// showPage(data, 1);
+
 
 
 /*
@@ -52,6 +52,29 @@ Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 
+function addPagination(list) {
+   const numOfPages = Math.ceil(list.length / studentsPerPage);
+   const linkList = document.querySelector(".link-list");
+   linkList.innerHTML = "";
+
+   for (let i = 1; i <= numOfPages; i++ ) {
+      const pageButton = `
+         <li>
+            <button type="button">${i}</button>
+         </li>
+      `
+      linkList.insertAdjacentHTML("beforeend", linkList);
+
+
+   }
+
+
+
+
+}
+
 
 
 // Call functions
+addPagination(list);
+showPage(data, 1);
